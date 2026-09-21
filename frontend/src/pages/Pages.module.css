@@ -23,7 +23,15 @@
 .contactGrid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 20px; }
 .contactBox { padding: 20px; }
 .contactBox p { margin: 8px 0; }
-.simpleForm { display: grid; gap: 14px; }
+.simpleForm { display: grid; gap: 16px; }
+.simpleForm label { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 14px; align-items: center; }
+.simpleForm label span { font-weight: 700; }
+.simpleForm input, .simpleForm textarea { width: 100%; border: 1px solid #bcb7a9; border-radius: 6px; padding: 9px 10px; background: #fff; color: var(--color-text); }
+.simpleForm input { min-height: 42px; }
+.simpleForm textarea { min-height: 132px; resize: vertical; }
+.messageLabel { align-items: center; }
+.mapEmbed { width: 100%; height: 260px; margin-top: 18px; border: 1px solid var(--color-border); border-radius: var(--radius); overflow: hidden; background: #eee; }
+.mapEmbed iframe { width: 100%; height: 100%; border: 0; display: block; }
 .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .gallery button { border: 0; padding: 0; border-radius: var(--radius); overflow: hidden; background: #fff; box-shadow: var(--shadow-soft); }
 .gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
@@ -37,5 +45,9 @@
   .heroInner, .grid, .contactGrid { grid-template-columns: 1fr; }
   .videoGrid { grid-template-columns: 1fr; }
   .gallery { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .simpleForm label { grid-template-columns: 1fr; gap: 7px; align-items: start; }
+  .mapEmbed { height: 220px; }
 }
 @media (max-width: 460px) { .gallery { grid-template-columns: 1fr; } }

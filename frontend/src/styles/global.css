@@ -68,6 +68,7 @@ button { cursor: pointer; }
   text-decoration: none;
   font-weight: 700;
   border: 1px solid transparent;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .button {
@@ -75,12 +76,21 @@ button { cursor: pointer; }
   color: #fff;
 }
 
-.button:hover { background: #3f4d00; }
+.button:hover {
+  background: #3f4d00;
+  color: #fff;
+  transform: translateY(-1px);
+}
 
 .buttonSecondary {
   background: #fff;
   color: var(--color-primary-dark);
   border-color: var(--color-primary);
+}
+
+.buttonSecondary:hover {
+  background: #f4efdF;
+  color: var(--color-primary-dark);
 }
 
 .card {
