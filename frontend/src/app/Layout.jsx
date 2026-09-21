@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import { courseCategories } from '../data/courses'
@@ -14,6 +14,16 @@ const navItems = [
 export function Layout() {
   const [isOpen, setIsOpen] = useState(false)
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 861px)')
+    const handleChange = (event) => {
+      if (event.matches) setIsOpen(false)
+    }
+
+    mediaQuery.addEventListener('change', handleChange)
+    return () => mediaQuery.removeEventListener('change', handleChange)
+  }, [])
+
   return (
     <div className={styles.shell}>
       <header className={styles.header}>
@@ -23,7 +33,7 @@ export function Layout() {
           </Link>
           <button
             type="button"
-            className={styles.menuButton}
+            className={`${styles.menuButton} ${isOpen ? styles.menuButtonOpen : ''}`}
             aria-expanded={isOpen}
             aria-controls="main-navigation"
             onClick={() => setIsOpen((value) => !value)}
@@ -68,7 +78,7 @@ export function Layout() {
           <div className={styles.footerLinks}>
             <Link to="/o-nama">O nama</Link>
             <Link to="/nase-prostorije">Naše prostorije</Link>
-            <Link to="/kako-do-nas">Kako do nas?</Link>
+            <Link to="/kako-do-nas">Kako do nas</Link>
             <a href="https://www.facebook.com/Edukativni-Centar-Korak-Napred-961526637264996/" target="_blank" rel="noreferrer">Facebook</a>
             <a href="https://www.youtube.com/channel/UCwdCnHvslIAKZXuvVu2brmw" target="_blank" rel="noreferrer">YouTube</a>
           </div>

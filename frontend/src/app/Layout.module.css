@@ -1,17 +1,21 @@
 .shell { min-height: 100vh; display: flex; flex-direction: column; }
-.header { background: var(--color-header); border-bottom: 1px solid var(--color-border); position: sticky; top: 0; z-index: 20; }
+.header { background: var(--color-header); border-bottom: 1px solid var(--color-border); position: relative; z-index: 40; }
 .headerInner { min-height: 92px; display: flex; align-items: center; gap: 24px; }
 .logoLink img { width: 210px; height: auto; }
 .nav { margin-left: auto; display: flex; align-items: center; gap: 4px; }
-.nav a { color: var(--color-text); text-decoration: none; padding: 12px 10px; border-radius: 6px; font-weight: 700; }
+.nav a { color: var(--color-text); text-decoration: none; padding: 12px 10px; border-radius: 6px; font-weight: 700; transition: background-color 0.2s ease, color 0.2s ease; }
 .nav a:hover, .active { background: rgba(117, 138, 0, 0.13); color: var(--color-primary-dark) !important; }
-.cta { background: var(--color-primary-dark) !important; color: #fff !important; margin-left: 8px; }
+.nav .cta { background: var(--color-primary-dark) !important; color: #fff !important; margin-left: 8px; transition: background-color 0.2s ease, transform 0.2s ease; }
+.nav .cta:hover, .nav .cta:focus-visible { background: #3f4d00 !important; color: #fff !important; transform: translateY(-1px); }
 .dropdown { position: relative; }
 .dropdownMenu { position: absolute; right: 0; top: 100%; min-width: 260px; padding: 8px; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius); box-shadow: var(--shadow-soft); display: none; }
 .dropdown:hover .dropdownMenu, .dropdown:focus-within .dropdownMenu { display: grid; }
 .dropdownMenu a { padding: 10px 12px; }
 .menuButton { display: none; margin-left: auto; border: 1px solid var(--color-border); background: #fff; border-radius: 6px; padding: 9px; align-items: center; gap: 4px; }
-.menuButton span:not(.menuText) { width: 22px; height: 2px; background: var(--color-text); display: block; }
+.menuButton span:not(.menuText) { width: 22px; height: 2px; background: var(--color-text); display: block; transition: transform 0.2s ease, opacity 0.2s ease; transform-origin: center; }
+.menuButtonOpen span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.menuButtonOpen span:nth-child(2) { opacity: 0; }
+.menuButtonOpen span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 .menuText { font-weight: 700; margin-left: 6px; }
 .footer { margin-top: auto; background: #2d2d27; color: #fff; padding: 28px 0; }
 .footer p { margin: 6px 0 0; color: #deded8; }
@@ -19,11 +23,41 @@
 .footerLinks { display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-end; }
 .footerLinks a { color: #fff; }
 @media (max-width: 860px) {
-  .headerInner { min-height: 76px; flex-wrap: wrap; }
+  .headerInner { min-height: 76px; flex-wrap: wrap; position: relative; }
   .logoLink img { width: 168px; }
-  .menuButton { display: inline-flex; flex-wrap: wrap; width: 76px; }
-  .nav { display: none; width: 100%; padding: 0 0 14px; flex-direction: column; align-items: stretch; }
-  .open { display: flex; }
+  .menuButton { display: grid; grid-template-columns: 22px auto; width: 86px; position: relative; z-index: 45; }
+  .menuButton span:not(.menuText) { grid-column: 1; }
+  .menuText { grid-column: 2; grid-row: 1 / 4; align-self: center; }
+  .nav {
+    position: absolute;
+    top: calc(100% - 1px);
+    left: 12px;
+    right: 12px;
+    z-index: 44;
+    width: auto;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 12px;
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--color-header);
+    border: 1px solid transparent;
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: none;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: max-height 0.24s ease, opacity 0.2s ease, transform 0.2s ease, padding 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .open {
+    max-height: 540px;
+    padding: 12px;
+    border-color: var(--color-border);
+    box-shadow: var(--shadow-soft);
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
   .dropdownMenu { position: static; display: grid; box-shadow: none; margin: 0 0 8px 12px; min-width: 0; }
   .cta { margin-left: 0; text-align: center; }
   .footerInner { align-items: flex-start; flex-direction: column; }
