@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
-import footerLogo from '../assets/footer-logo.png'
 import logo from '../assets/logo.png'
 import { courseCategories } from '../data/courses'
 import styles from './Layout.module.css'
@@ -183,7 +182,7 @@ export function Layout() {
         <div className={`container ${styles.footerContent}`}>
           <div className={styles.footerGrid}>
             <section className={styles.footerBrand} aria-label="Korak napred">
-              <img src={footerLogo} alt="Edukativni centar Korak napred" />
+              <img src={logo} alt="Edukativni centar Korak napred" />
               <div>
                 <strong>Korak napred</strong>
                 <span>EDUKATIVNI CENTAR</span>
