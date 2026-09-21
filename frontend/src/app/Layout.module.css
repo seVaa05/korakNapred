@@ -1,0 +1,31 @@
+.shell { min-height: 100vh; display: flex; flex-direction: column; }
+.header { background: var(--color-header); border-bottom: 1px solid var(--color-border); position: sticky; top: 0; z-index: 20; }
+.headerInner { min-height: 92px; display: flex; align-items: center; gap: 24px; }
+.logoLink img { width: 210px; height: auto; }
+.nav { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+.nav a { color: var(--color-text); text-decoration: none; padding: 12px 10px; border-radius: 6px; font-weight: 700; }
+.nav a:hover, .active { background: rgba(117, 138, 0, 0.13); color: var(--color-primary-dark) !important; }
+.cta { background: var(--color-primary-dark) !important; color: #fff !important; margin-left: 8px; }
+.dropdown { position: relative; }
+.dropdownMenu { position: absolute; right: 0; top: 100%; min-width: 260px; padding: 8px; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius); box-shadow: var(--shadow-soft); display: none; }
+.dropdown:hover .dropdownMenu, .dropdown:focus-within .dropdownMenu { display: grid; }
+.dropdownMenu a { padding: 10px 12px; }
+.menuButton { display: none; margin-left: auto; border: 1px solid var(--color-border); background: #fff; border-radius: 6px; padding: 9px; align-items: center; gap: 4px; }
+.menuButton span:not(.menuText) { width: 22px; height: 2px; background: var(--color-text); display: block; }
+.menuText { font-weight: 700; margin-left: 6px; }
+.footer { margin-top: auto; background: #2d2d27; color: #fff; padding: 28px 0; }
+.footer p { margin: 6px 0 0; color: #deded8; }
+.footerInner { display: flex; justify-content: space-between; gap: 24px; align-items: center; }
+.footerLinks { display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-end; }
+.footerLinks a { color: #fff; }
+@media (max-width: 860px) {
+  .headerInner { min-height: 76px; flex-wrap: wrap; }
+  .logoLink img { width: 168px; }
+  .menuButton { display: inline-flex; flex-wrap: wrap; width: 76px; }
+  .nav { display: none; width: 100%; padding: 0 0 14px; flex-direction: column; align-items: stretch; }
+  .open { display: flex; }
+  .dropdownMenu { position: static; display: grid; box-shadow: none; margin: 0 0 8px 12px; min-width: 0; }
+  .cta { margin-left: 0; text-align: center; }
+  .footerInner { align-items: flex-start; flex-direction: column; }
+  .footerLinks { justify-content: flex-start; }
+}
