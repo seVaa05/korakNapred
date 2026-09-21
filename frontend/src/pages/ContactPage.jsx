@@ -34,7 +34,14 @@ export function ContactPage() {
               <label><span>Telefon:</span><input type="tel" required /></label>
             <label><span>Naslov:</span><input required /></label>
             <label className={styles.messageLabel}><span>Poruka:</span><textarea required rows="5"></textarea></label>
-            <button className="button" type="submit">Pošalji demo poruku</button>
+            <button className={styles.contactSubmitButton} type="submit">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M21 11.5a7.7 7.7 0 0 1-7.8 7.5 8.5 8.5 0 0 1-3.7-.8L4 20l1.7-4.8A7.2 7.2 0 0 1 5 11.5 7.7 7.7 0 0 1 12.8 4 7.7 7.7 0 0 1 21 11.5Z" />
+                <path d="M9 11h6" />
+                <path d="M9 14h4" />
+              </svg>
+              <span>Pošalji demo poruku</span>
+            </button>
           </form>
         </div>
       </div>

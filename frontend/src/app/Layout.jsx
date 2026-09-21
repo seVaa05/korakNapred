@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { Link, NavLink, Outlet } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import footerLogo from '../assets/footer-logo.png'
 import logo from '../assets/logo.png'
 import { courseCategories } from '../data/courses'
@@ -45,20 +45,76 @@ function FooterIcon({ name }) {
 
 export function Layout() {
   const [isOpen, setIsOpen] = useState(false)
+  const [coursesOpen, setCoursesOpen] = useState(false)
+  const [showBackToTop, setShowBackToTop] = useState(false)
+  const headerRef = useRef(null)
+  const coursesRef = useRef(null)
+  const location = useLocation()
+  const isCoursesActive = location.pathname === '/kursevi' || location.pathname.startsWith('/kursevi/')
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(min-width: 861px)')
     const handleChange = (event) => {
-      if (event.matches) setIsOpen(false)
+      if (event.matches) {
+        setIsOpen(false)
+        setCoursesOpen(false)
+      }
     }
 
     mediaQuery.addEventListener('change', handleChange)
     return () => mediaQuery.removeEventListener('change', handleChange)
   }, [])
 
+  useEffect(() => {
+    if (!coursesOpen) return undefined
+
+    const handlePointerDown = (event) => {
+      if (!coursesRef.current?.contains(event.target)) {
+        setCoursesOpen(false)
+      }
+    }
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setCoursesOpen(false)
+      }
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [coursesOpen])
+
+  useEffect(() => {
+    const header = headerRef.current
+    if (!header) return undefined
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowBackToTop(!entry.isIntersecting)
+      },
+      { threshold: 0 },
+    )
+
+    observer.observe(header)
+    return () => observer.disconnect()
+  }, [])
+
+  const handleBackToTop = () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    })
+  }
+
   return (
     <div className={styles.shell}>
-      <header className={styles.header}>
+      <header ref={headerRef} className={styles.header}>
         <div className={`container ${styles.headerInner}`}>
           <Link to="/" className={styles.logoLink} aria-label="Korak napred početna">
             <img src={logo} alt="Edukativni centar Korak napred" />
@@ -78,7 +134,10 @@ export function Layout() {
             className={`${styles.nav} ${isOpen ? styles.open : ''}`}
             aria-label="Glavna navigacija"
             onClick={(event) => {
-              if (event.target.closest('a')) setIsOpen(false)
+              if (event.target.closest('a')) {
+                setIsOpen(false)
+                setCoursesOpen(false)
+              }
             }}
           >
             {navItems.map((item) => (
@@ -86,21 +145,40 @@ export function Layout() {
                 {item.label}
               </NavLink>
             ))}
-            <div className={styles.dropdown}>
-              <NavLink to="/kursevi" className={({ isActive }) => (isActive ? styles.active : undefined)}>Kursevi</NavLink>
-              <div className={styles.dropdownMenu}>
+            <div className={styles.dropdown} ref={coursesRef}>
+              <button
+                type="button"
+                className={`${styles.coursesTrigger} ${isCoursesActive ? styles.active : ''}`}
+                aria-expanded={coursesOpen}
+                aria-haspopup="menu"
+                aria-current={isCoursesActive ? 'page' : undefined}
+                onClick={() => setCoursesOpen((value) => !value)}
+              >
+                Kursevi
+              </button>
+              <div className={`${styles.dropdownMenu} ${coursesOpen ? styles.dropdownMenuOpen : ''}`} role="menu">
                 {courseCategories.map((category) => (
-                  <Link key={category.slug} to={`/kursevi/${category.slug}`}>{category.shortTitle}</Link>
+                  <Link key={category.slug} to={`/kursevi/${category.slug}`} role="menuitem">{category.shortTitle}</Link>
                 ))}
               </div>
             </div>
-            <NavLink to="/prijava" className={styles.cta}>Prijavi se na kurs</NavLink>
+            <NavLink to="/prijava" className={({ isActive }) => `${styles.cta} ${isActive ? styles.active : ''}`}>Prijavi se na kurs</NavLink>
           </nav>
         </div>
       </header>
       <main>
         <Outlet />
       </main>
+      <button
+        type="button"
+        className={`${styles.backToTop} ${showBackToTop ? styles.backToTopVisible : ''}`}
+        aria-label="Vrati se na vrh"
+        onClick={handleBackToTop}
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="m6 14 6-6 6 6" />
+        </svg>
+      </button>
       <footer className={styles.footer}>
         <div className={`container ${styles.footerContent}`}>
           <div className={styles.footerGrid}>

@@ -1,9 +1,14 @@
 :root {
-  --color-primary: #758a00;
-  --color-primary-dark: #506000;
+  --color-primary: #3f6f4f;
+  --color-primary-dark: #3f6f4f;
+  --color-primary-hover: #345d42;
+  --color-primary-active: #2e5139;
   --color-accent: #a1b52d;
   --color-surface-warm: #ebd19b;
-  --color-header: #ececec;
+  --color-header: #2b5c41;
+  --color-footer: #1f3d2e;
+  --color-header-text: #ffffff;
+  --color-header-active: #e7e9d8;
   --color-background: #f9f9f9;
   --color-surface: #ffffff;
   --color-text: #25251f;
@@ -34,7 +39,7 @@ button, input, select, textarea { font: inherit; }
 
 button { cursor: pointer; }
 
-:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
+:focus-visible { outline: 3px solid rgba(63, 111, 79, 0.3); outline-offset: 3px; }
 
 .container {
   width: min(100% - 32px, var(--container));
@@ -77,9 +82,13 @@ button { cursor: pointer; }
 }
 
 .button:hover {
-  background: #3f4d00;
+  background: var(--color-primary-hover);
   color: #fff;
   transform: translateY(-1px);
+}
+
+.button:active {
+  background: var(--color-primary-active);
 }
 
 .buttonSecondary {
@@ -90,7 +99,8 @@ button { cursor: pointer; }
 
 .buttonSecondary:hover {
   background: #f4efdf;
-  color: var(--color-primary-dark);
+  border-color: var(--color-primary-hover);
+  color: var(--color-primary-hover);
 }
 
 .card {

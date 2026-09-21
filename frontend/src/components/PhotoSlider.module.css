@@ -4,7 +4,7 @@
 .viewport .activeImage { opacity: 1; }
 .controls { display: flex; justify-content: center; align-items: center; gap: 16px; padding: 10px 12px; background: #fff; }
 .controls > button { flex: 0 0 auto; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--color-primary); background: var(--color-primary-dark); color: #fff; font-size: 1.5rem; line-height: 1; transition: background-color 0.2s ease, transform 0.2s ease; }
-.controls > button:hover { background: #3f4d00; transform: translateY(-1px); }
+.controls > button:hover { background: var(--color-primary-hover); transform: translateY(-1px); }
 .dots { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
 .dots button { width: 22px; height: 22px; border: 0; border-radius: 999px; padding: 6px; background: transparent; position: relative; }
 .dots button::after { content: ''; position: absolute; inset: 6px; border-radius: 999px; background: #cfc7b5; transition: background-color 0.2s ease, transform 0.2s ease; }
