@@ -29,11 +29,11 @@ export function ContactPage() {
           <form className={`card ${styles.contactBox} ${styles.simpleForm}`} onSubmit={(event) => { event.preventDefault(); setSent(true) }}>
             <h2>Pišite nam</h2>
             {sent ? <p role="status">Demo poruka je obrađena. Podaci nisu poslati edukativnom centru.</p> : null}
-            <label><span>Ime i prezime</span><input required /></label>
-            <label><span>E-mail</span><input type="email" required /></label>
-              <label><span>Telefon</span><input type="tel" required /></label>
-            <label><span>Naslov</span><input required /></label>
-            <label className={styles.messageLabel}><span>Poruka</span><textarea required rows="5"></textarea></label>
+            <label><span>Ime i prezime:</span><input required /></label>
+            <label><span>E-mail:</span><input type="email" required /></label>
+              <label><span>Telefon:</span><input type="tel" required /></label>
+            <label><span>Naslov:</span><input required /></label>
+            <label className={styles.messageLabel}><span>Poruka:</span><textarea required rows="5"></textarea></label>
             <button className="button" type="submit">Pošalji demo poruku</button>
           </form>
         </div>
