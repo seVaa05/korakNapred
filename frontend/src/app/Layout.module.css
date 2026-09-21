@@ -1,5 +1,10 @@
 .shell { min-height: 100vh; display: flex; flex-direction: column; }
-.header { background: var(--color-header); border-bottom: 1px solid var(--color-border); position: sticky; top: 0; z-index: 40; }
+.header {
+  background: var(--color-header);
+  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  z-index: 40;
+}
 .headerInner { min-height: 92px; display: flex; align-items: center; gap: 24px; }
 .logoLink img { width: 210px; height: auto; }
 .nav { margin-left: auto; display: flex; align-items: center; gap: 4px; }

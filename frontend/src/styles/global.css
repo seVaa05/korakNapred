@@ -89,7 +89,7 @@ button { cursor: pointer; }
 }
 
 .buttonSecondary:hover {
-  background: #f4efdF;
+  background: #f4efdf;
   color: var(--color-primary-dark);
 }
 

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDocumentTitle } from '../utils/useDocumentTitle'
 import styles from './Pages.module.css'
 
-const GOOGLE_MAPS_EMBED_URL = 'https://www.google.com/maps?q=Bulevar%20Peka%20Dap%C4%8Devi%C4%87a%2059%2C%20Beograd&output=embed'
+const GOOGLE_MAPS_EMBED_URL = 'https://www.google.com/maps?q=Edukativni%20centar%20Korak%20napred%2C%20Bulevar%20Peka%20Dap%C4%8Devi%C4%87a%2059%2C%20Beograd&output=embed'
 
 export function ContactPage() {
   const [sent, setSent] = useState(false)
@@ -31,6 +31,7 @@ export function ContactPage() {
             {sent ? <p role="status">Demo poruka je obrađena. Podaci nisu poslati edukativnom centru.</p> : null}
             <label><span>Ime i prezime</span><input required /></label>
             <label><span>E-mail</span><input type="email" required /></label>
+              <label><span>Telefon</span><input type="tel" required /></label>
             <label><span>Naslov</span><input required /></label>
             <label className={styles.messageLabel}><span>Poruka</span><textarea required rows="5"></textarea></label>
             <button className="button" type="submit">Pošalji demo poruku</button>

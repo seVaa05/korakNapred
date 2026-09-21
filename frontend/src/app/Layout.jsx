@@ -78,7 +78,7 @@ export function Layout() {
           <div className={styles.footerLinks}>
             <Link to="/o-nama">O nama</Link>
             <Link to="/nase-prostorije">Naše prostorije</Link>
-            <Link to="/kako-do-nas">Kako do nas?</Link>
+            <Link to="/kako-do-nas">Kako do nas</Link>
             <a href="https://www.facebook.com/Edukativni-Centar-Korak-Napred-961526637264996/" target="_blank" rel="noreferrer">Facebook</a>
             <a href="https://www.youtube.com/channel/UCwdCnHvslIAKZXuvVu2brmw" target="_blank" rel="noreferrer">YouTube</a>
           </div>
